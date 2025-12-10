@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Digital Menu</h1>
+    {% for item in items %}
+        <div class="item">
+            <h2>{{ item.name }}</h2>
+            <p>{{ item.description }}</p>
+            <p class="price">₱{{ item.price }}</p>
+            <p>Status: {{ item.available|yesno:"Available,Out of Stock" }}</p>
+        </div>
+    {% empty %}
+        <p>No menu items available.</p>
+    {% endfor %}
+</body>
+</html>
