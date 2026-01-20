@@ -10,6 +10,6 @@ def menu_view(request):
     return render(request, 'menu.html', {'items': items})
 
 def order_list(request):
-    orders = Order.objects.all()
+    orders = Order.objects.prefetch_related('items__menu_item').all().order_by('-timestamp')
     return render(request, 'orders.html', {'orders': orders})
 

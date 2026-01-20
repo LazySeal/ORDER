@@ -15,7 +15,7 @@ class OrderItemInline(admin.TabularInline):
     extra = 1
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'table_number', 'status', 'timestamp']
+    list_display = ('id', 'table_number', 'status', 'timestamp', 'get_order_items')
     list_filter = ['status']
     inlines = [OrderItemInline]
 
@@ -24,3 +24,4 @@ admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Ingredient)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(KitchenTicket)
+

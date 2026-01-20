@@ -3,16 +3,76 @@
 <head>
     <title>Welcome</title>
     <style>
-        body { font-family: Arial; padding: 40px; background: #f0f0f0; }
-        h1 { color: #333; }
-        a { display: block; margin: 10px 0; font-size: 18px; color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        * body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #494a4e 0%, #c9c2d1 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .nav-container {
+            position: relative;
+            width: 400px;
+            height: 50px;
+            background: #222;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-container a {
+            color: white;
+            text-decoration: none;
+            width: 100px;
+            text-align: center;
+            line-height: 25px;
+            position: relative;
+            z-index: 1;
+
+        }
+
+        .hover-highlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 100%;
+            background: linear-gradient(45deg, #194b41, #33fffc);
+            border-radius: 10px;
+            transition: left 0.5s ease;
+            z-index: 0;
+        }
+
+        .nav-container a:nth-child(1):hover ~ .hover-highlight {
+        left: 0;
+        }
+        .nav-container a:nth-child(2):hover ~ .hover-highlight {
+        left: 135px;
+        }
+        .nav-container a:nth-child(3):hover ~ .hover-highlight {
+        left: 270px;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Welcome to the Order Management System</h1>
-    <a href="/menu/"> View Menu</a>
-    <a href="/orders/"> View Orders</a>
-    <a href="/admin/"> Admin Dashboard</a>
+  <h1>Welcome to the Order Management System</h1>
+  <div class="nav-container">
+    <a href="/menu/">View Menu</a>
+    <a href="/orders/">View Orders</a>
+    <a href="/admin/">Admin Dashboard</a>
+    <span class="hover-highlight"></span>
+  </div>
 </body>
-</html>

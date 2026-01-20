@@ -1,20 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #494a4e 0%, #c9c2d1 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .orders-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .order {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .order:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(6, 236, 26, 0.3);
+        }
+        
+        .order h2 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+        
+        .status {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            background: #57e43b;
+            color: #ebe8e2;
+        }
+        
+        .order p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .order ul {
+            list-style: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .order li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .order li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 40px;
+        }
     </style>
 </head>
 <body>
     <h1>Order List</h1>
-    {% for order in orders %}
-        <div class="order">
-            <h2>Order #{{ order.id }} - Table {{ order.table_number }}</h2>
-            <p class="status">Status: {{ order.status }}</p>
-            <p>Placed: {{ order.timestamp }}</p>
-            <ul>
-                {% for item in order.items.all %}
-                    <li>{{ item.quantity }} x {{ item.menu_item.name }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% empty %}
-        <p>No orders found.</p>
-    {% endfor %}
+    <div class="orders-container">
+        {% for order in orders %}
+            <div class="order">
+                <h2>Order #{{ order.id }} - Table {{ order.table_number }}</h2>
+                <p class="status">Status: {{ order.status }}</p>
+                <p>Placed: {{ order.timestamp }}</p>
+                <ul>
+                    {% for item in order.items.all %}
+                        <li>{{ item.quantity }} x {{ item.menu_item.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% empty %}
+            <p class="empty-message">No orders found.</p>
+        {% endfor %}
+    </div>
 </body>
 </html>
